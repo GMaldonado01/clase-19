@@ -63,11 +63,11 @@ router.post("/login", async (req, res) => {
   try {
     const { user, pass } = req.body;
 
-    if (user === "gmaldonado" && pass === "ggg123") {
+    if (user === "adminCoder@coder.com" && pass === "adminCod3r123") {
       req.session.user = { username: user, admin: true };
-      res.status(200).send({ status: "OK", data: "Sesión iniciada" });
+      res.redirect("./profile");
     } else {
-      res.status(401).send({ status: "ERR", data: "Datos no válidos" });
+      res.redirect("./login");
     }
   } catch (err) {
     res.status(500).send({ status: "ERR", data: err.message });
@@ -80,9 +80,9 @@ router.post("/register", async (req, res) => {
 
     if (user === user && pass === pass) {
       req.session.user = { username: user, admin: false };
-      res.status(200).send({ status: "OK", data: "Usuario registrado" });
+      res.redirect("./profile");
     } else {
-      res.status(401).send({ status: "ERR", data: "Datos no válidos" });
+      res.redirect("./login");
     }
   } catch (err) {
     res.status(500).send({ status: "ERR", data: err.message });

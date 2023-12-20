@@ -53,7 +53,7 @@ router.get("/cookies", async (req, res) => {
 
 router.get("/login", async (req, res) => {
   if (req.session.user) {
-    res.redirect("/profile");
+    res.redirect("/products");
   } else {
     res.render("login", {});
   }
@@ -68,7 +68,10 @@ router.get("/profile", async (req, res) => {
 });
 
 router.get("/register", async (req, res) => {
-  res.render("register", {});
+  try {
+    res.redirect("/products");
+  } catch (err) {
+    res.redirect("/login");
+  }
 });
-
 export default router;
